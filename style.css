@@ -1,0 +1,49 @@
+html,
+body {
+	font-size: 0.875rem;
+}
+.container-sm {
+	height: 100vh;
+	max-width: 640px !important;
+	background-color: red;
+}
+/* The message box is shown when the user clicks on the password field */
+#messageInside {
+	/* display: none; */
+	/* background: #f1f1f1; */
+	/* color: #000; */
+	/* position: relative; */
+	font-size: 12px;
+	padding: 20px;
+	margin-top: 10px;
+}
+/* Add a green text color and a checkmark when the requirements are right */
+.valid {
+	color: transparent;
+	text-shadow: 0 0 0 green;
+}
+
+.valid::before {
+	position: relative;
+	left: -10px;
+	content: "\2714";
+}
+
+/* Add a red text color and an "x" icon when the requirements are wrong */
+.invalid {
+	color: transparent;
+	text-shadow: 0 0 0 red;
+}
+
+.invalid::before {
+	position: relative;
+	left: -10px;
+	/* font-size: 10px; */
+	content: "\2716";
+}
+
+@media screen and (max-width: 640px) {
+  .container-sm {
+    background-color: green;
+  }
+}
