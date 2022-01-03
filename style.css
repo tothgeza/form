@@ -3,7 +3,7 @@ body {
 	font-size: 0.875rem;
 }
 .container-sm {
-	/* height: 100vh; */
+	height: 100vh;
 	max-width: 475px !important;
 	background-color: red;
 }
@@ -47,14 +47,10 @@ body {
     background-color: green;
   }
 }
-@media screen and (orientation: landscape) {
-  html {
-    transform: rotate(-90deg);
-    transform-origin: left top;
-    width: 100vh;
-    /* overflow-x: hidden; */
-    position: absolute;
-    top: 100%;
-    left: 0;
+
+@media screen and (orientation: portrait) {
+  section {
+    height: 100vh;
+	width: 100vw;
   }
 }
