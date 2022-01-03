@@ -3,7 +3,7 @@ body {
 	font-size: 0.875rem;
 }
 .container-sm {
-	height: 100vh;
+	/* height: 100vh; */
 	max-width: 640px !important;
 	background-color: red;
 }

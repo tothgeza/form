@@ -6,6 +6,7 @@ $(function () {
         // true for mobile device
         console.log("mobile device");
     } else {
+        $('section').addClass('vh-100');
         // false for not mobile device
         console.log("not mobile device");
     }
