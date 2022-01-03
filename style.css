@@ -5,7 +5,7 @@ body {
 .container-sm {
 	height: 100vh;
 	max-width: 475px !important;
-	background-color: red;
+	/* background-color: red; */
 }
 /* The message box is shown when the user clicks on the password field */
 #messageInside {
@@ -42,15 +42,15 @@ body {
 	content: "\2716";
 }
 
-@media screen and (max-width: 640px) {
+/* @media screen and (max-width: 640px) {
   .container-sm {
     background-color: green;
   }
-}
+} */
 
-@media screen and (orientation: portrait) {
+/* @media screen and (orientation: portrait) {
   section {
     height: 100vh;
 	width: 100vw;
   }
-}
+} */

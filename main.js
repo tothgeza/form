@@ -4,9 +4,11 @@ $(function () {
     console.log(navigator.userAgent)
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
         // true for mobile device
+        $('.card').addClass('border-0')
         console.log("mobile device");
     } else {
         $('section').addClass('vh-100');
+        $('.card').addClass('shadow');
         // false for not mobile device
         console.log("not mobile device");
     }
