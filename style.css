@@ -4,7 +4,7 @@ body {
 }
 .container-sm {
 	/* height: 100vh; */
-	max-width: 640px !important;
+	max-width: 475px !important;
 	background-color: red;
 }
 /* The message box is shown when the user clicks on the password field */
@@ -45,5 +45,16 @@ body {
 @media screen and (max-width: 640px) {
   .container-sm {
     background-color: green;
+  }
+}
+@media screen and (orientation: landscape) {
+  html {
+    transform: rotate(-90deg);
+    transform-origin: left top;
+    width: 100vh;
+    /* overflow-x: hidden; */
+    position: absolute;
+    top: 100%;
+    left: 0;
   }
 }
