@@ -131,6 +131,7 @@ $(function () {
     function showSuccess() {
         $('#spinner').css("display", "none");
         $('.card').css("display", "flex");
-        $('.success').css("display", "block");
+        $('.message').children('h5').html("Sikeres regisztráció!");
+        $('.message').css("display", "block");
     }
 })

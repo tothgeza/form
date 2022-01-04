@@ -12,14 +12,27 @@ $(function() {
             'Content-Type': 'application/json',
         },
     } )
-    .then(response => response.json())
-    .then(data => {
+    .then(response => {
+        if (response.ok) {
+            return response.json();
+        }
+        return Promise.reject(response);
+    } )
+    .then((data) => {
         console.log(data);
+            fillData(data);
+            hideSpinner();
+            showForm();
         // let mainScript = document.createElement("script");
         // mainScript.setAttribute("src", "main.js");
         // document.body.appendChild(mainScript);
-        fillData(data);
+    })
+    .catch((error) => {
+        console.log('Something went wrong.', error);
         hideSpinner();
+        showForm();
+        showErrorMessage();
+        
     })
 })
 
@@ -32,5 +45,14 @@ function fillData(data){
 
 function hideSpinner() {
     $('#spinner').css("display", "none");
+}
+
+function showForm() {
     $('.card').css("display", "flex");
+}
+
+function showErrorMessage() {
+    $('.accordion').css("display", "none");
+    $('.message').children('h5').html("Lejárt a regisztráció lehetőséged!");
+    $('.message').css("display", "block");
 }
