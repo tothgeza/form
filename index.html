@@ -44,14 +44,26 @@
 			referrerpolicy="no-referrer"
 			charset="UTF-8"
 		></script>
-		<script src="https://unpkg.com/imask"></script>
+		<script src="https://unpkg.com/imask" defer></script>
 
-		<script type="text/javascript" src="datepicker.js"></script>
-		<script type="text/javascript" src="main.js" defer></script>
+		<script type="text/javascript" src="device.js" defer></script>
+		<script type="text/javascript" src="datepicker.js" defer></script>
+		<script type="module" src="main.js" defer></script>
+		<script type="text/javascript" src="token.js" defer></script>
 
 		<title>Form</title>
 	</head>
 	<body>
+		<div class="d-flex justify-content-center">
+			<button class="btn btn-primary m-5" type="button" id="spinner" disabled>
+				<span
+					class="spinner-border spinner-border-sm"
+					role="status"
+					aria-hidden="true"
+				></span>
+				Betöltés...
+			</button>
+		</div>
 		<section class="">
 			<div
 				class="
@@ -65,11 +77,18 @@
 			>
 				<!-- <div class="d-flex align-items-center justify-content-center"> -->
 				<!-- <div class="col-8"> -->
-					<!-- <div class="col-12 my-5"> -->
-					<div class="card col-12">
-						<div class="p-5">
+				<!-- <div class="col-12 my-5"> -->
+				<div class="card col-12" style="display: none">
+					<div class="p-5">
 						<!-- <div class="card-body p-5"> -->
-							<div class="accordion" id="accordionForm">
+
+						<div class="accordion" id="accordionForm">
+							<form
+								class="needs-validation"
+								id="user-data-form"
+								autocomplete="off"
+								novalidate
+							>
 								<div class="accordion-item border-0">
 									<div
 										id="collapseOne"
@@ -78,117 +97,112 @@
 										data-bs-parent="#accordionForm"
 									>
 										<div class="accordion-body p-0">
-											<form
-												class="needs-validation"
-												id="user-data-form"
-												autocomplete="off"
-												novalidate
-											>
-												<div class="mb-4 text-center">
-													<h5>Gratulálunk!</h5>
-													<h5>Meghívtak a Gibsz családba!</h5>
-													<p class="text-muted">
-														Kérjük, figyelmesen töltsd ki az adatokat!
-													</p>
+											<div class="mb-4 text-center">
+												<h5>Gratulálunk!</h5>
+												<h5 id="familyName"></h5>
+												<p class="text-muted">
+													Kérjük, figyelmesen töltsd ki az adatokat!
+												</p>
+											</div>
+											<div class="mb-3">
+												<label for="emailInput" class="form-label"
+													>E-mail cím</label
+												>
+												<input
+													type="email"
+													class="form-control"
+													id="emailInput"
+													value="gipsz.jakab@asd.hu"
+													readonly
+												/>
+											</div>
+											<div class="mb-3">
+												<label for="lastNameInput" class="form-label"
+													>Vezetéknév</label
+												>
+												<input
+													type="text"
+													class="form-control"
+													id="lastNameInput"
+													name="lastNameInput"
+													required
+												/>
+												<div class="invalid-feedback">
+													Kérjük, töltsd ki ezt a mezőt!
 												</div>
-												<div class="mb-3">
-													<label for="emailInput" class="form-label"
-														>E-mail cím</label
-													>
+											</div>
+											<div class="mb-3">
+												<label for="firstNameInput" class="form-label"
+													>Keresztnév</label
+												>
+												<input
+													type="text"
+													class="form-control"
+													id="firstNameInput"
+													name="firstNameInput"
+													required
+												/>
+												<div class="invalid-feedback">
+													Kérjük, töltsd ki ezt a mezőt!
+												</div>
+											</div>
+											<div class="mb-3">
+												<label for="nickNameInput" class="form-label"
+													>Becenév
+													<span class="text-muted" style="font-size: 12px"
+														>(opcionális)</span
+													></label
+												>
+												<input
+													type="text"
+													class="form-control"
+													name="nickNameInput"
+													id="nickNameInput"
+												/>
+											</div>
+											<div class="mb-3">
+												<label for="datepicker">Születési dátum</label>
+												<div class="input-group date" id="datepicker">
 													<input
-														type="email"
+														type="text"
 														class="form-control"
-														id="emailInput"
-														value="gipsz.jakab@asd.hu"
+														name="dateInput"
+														id="dateInput"
 														readonly
 													/>
-												</div>
-												<div class="mb-3">
-													<label for="lastNameInput" class="form-label"
-														>Vezetéknév</label
+													<span
+														class="input-group-text input-group-append"
+														id="basic-addon2"
 													>
+														<i class="fa fa-calendar"></i>
+													</span>
+													<div class="invalid-feedback">
+														Kérjük, válassz születési dátumot!
+													</div>
+												</div>
+											</div>
+											<div class="mb-3">
+												<label for="phoneInput"
+													>Mobil szám
+													<span class="text-muted" style="font-size: 12px"
+														>(opcionális)</span
+													></label
+												>
+												<div class="input-group">
+													<span class="input-group-text">+36</span>
 													<input
-														type="text"
+														type="tel"
 														class="form-control"
-														id="lastNameInput"
-														name="lastNameInput"
-														required
+														id="phoneInput"
+														name="phoneInput"
+														placeholder="(20) 123-4567"
 													/>
 													<div class="invalid-feedback">
-														Kérjük, töltsd ki ezt a mezőt!
+														Kérjük, helyesen add meg mobilszámod!
 													</div>
 												</div>
-												<div class="mb-3">
-													<label for="firstNameInput" class="form-label"
-														>Keresztnév</label
-													>
-													<input
-														type="text"
-														class="form-control"
-														id="firstNameInput"
-														name="firstNameInput"
-														required
-													/>
-													<div class="invalid-feedback">
-														Kérjük, töltsd ki ezt a mezőt!
-													</div>
-												</div>
-												<div class="mb-3">
-													<label for="nickNameInput" class="form-label"
-														>Becenév
-														<span class="text-muted" style="font-size: 12px"
-															>(opcionális)</span
-														></label
-													>
-													<input
-														type="text"
-														class="form-control"
-														id="nickNameInput"
-													/>
-												</div>
-												<div class="mb-3">
-													<label for="datepicker">Születési dátum</label>
-													<div class="input-group date" id="datepicker">
-														<input
-															type="text"
-															class="form-control"
-															name="dateInput"
-															id="dateInput"
-															readonly
-														/>
-														<span
-															class="input-group-text input-group-append"
-															id="basic-addon2"
-														>
-															<i class="fa fa-calendar"></i>
-														</span>
-														<div class="invalid-feedback">
-															Kérjük, válassz születési dátumot!
-														</div>
-													</div>
-												</div>
-												<div class="mb-3">
-													<label for="phoneInput"
-														>Mobil szám
-														<span class="text-muted" style="font-size: 12px"
-															>(opcionális)</span
-														></label
-													>
-													<div class="input-group">
-														<span class="input-group-text">+36</span>
-														<input
-															type="tel"
-															class="form-control"
-															id="phoneInput"
-															name="phoneInput"
-															placeholder="(20) 123-4567"
-														/>
-														<div class="invalid-feedback">
-															Kérjük, helyesen add meg mobilszámod!
-														</div>
-													</div>
-												</div>
-											</form>
+											</div>
+											<!-- </form> -->
 										</div>
 									</div>
 								</div>
@@ -210,91 +224,90 @@
 										data-bs-parent="#accordionForm"
 									>
 										<div class="accordion-body">
-											<form
-												class="needs-validation2"
-												id="user-password-form"
-												novalidate
-											>
-												<div class="mb-4 text-center">
-													<h5 style="line-height: 2rem">
-														Kérjük állítsa be a jelszavát!
-													</h5>
-													<p class="text-muted">
-														A jelszónak tartalmazni kell számot, kis és
-														nagybetűt, illetve a hossza 8 és 15 karakter között
-														kell legyen! Továbbá nem mutathat hasonlóságot a
-														nevével és az email címével!
-													</p>
+											<!-- <form
+											class="needs-validation2"
+											id="user-password-form"
+											novalidate
+										> -->
+											<div class="mb-4 text-center">
+												<h5 style="line-height: 2rem">
+													Kérjük állítsa be a jelszavát!
+												</h5>
+												<p class="text-muted">
+													A jelszónak tartalmazni kell számot, kis és nagybetűt,
+													illetve a hossza 8 és 15 karakter között kell legyen!
+													Továbbá nem mutathat hasonlóságot a nevével és az
+													email címével!
+												</p>
+											</div>
+											<div class="mb-3">
+												<label for="passwordInput" class="form-label"
+													>Jelszó</label
+												>
+												<input
+													type="password"
+													class="form-control"
+													id="passwordInput"
+													name="passwordInput"
+													required
+												/>
+												<div class="invalid-feedback" id="pass-required">
+													Kérjük, helyesen töltsd ki ezt a mezőt!
 												</div>
-												<div class="mb-3">
-													<label for="passwordInput" class="form-label"
-														>Jelszó</label
-													>
-													<input
-														type="password"
-														class="form-control"
-														id="passwordInput"
-														name="passwordInput"
-														required
-													/>
-													<div class="invalid-feedback" id="pass-required">
-														Kérjük, helyesen töltsd ki ezt a mezőt!
-													</div>
-													<div class="my-3 collapse p-0 m-0" id="message">
-														<div id="messageInside">
-															<p>
-																A jelszónak a következőket kell tartalmaznia:
-															</p>
-															<p id="letter" class="invalid">
-																Legalább egy kisbetű
-															</p>
-															<p id="capital" class="invalid">
-																Legalább egy nagybetű
-															</p>
-															<p id="number" class="invalid">
-																Legalább egy szám
-															</p>
-															<p id="length" class="invalid">
-																Legalább 8, legfeljebb 15 karakter
-															</p>
-															<p id="names" class="valid">
-																Nem mutathat hasonlóságot a vezetéknevével,
-																keresztnevével és e-mail címével!
-															</p>
-														</div>
+												<div class="my-3 collapse p-0 m-0" id="message">
+													<div id="messageInside">
+														<p>A jelszónak a következőket kell tartalmaznia:</p>
+														<p id="letter" class="invalid">
+															Legalább egy kisbetű
+														</p>
+														<p id="capital" class="invalid">
+															Legalább egy nagybetű
+														</p>
+														<p id="number" class="invalid">Legalább egy szám</p>
+														<p id="length" class="invalid">
+															Legalább 8, legfeljebb 15 karakter
+														</p>
+														<p id="names" class="valid">
+															Nem mutathat hasonlóságot a vezetéknevével,
+															keresztnevével és e-mail címével!
+														</p>
 													</div>
 												</div>
-												<div class="mb-3">
-													<label for="confirmPasswordInput" class="form-label"
-														>Jelszó megerősítés</label
-													>
-													<input
-														type="password"
-														class="form-control"
-														id="confirmPasswordInput"
-														data-v-equal="#passwordInput"
-														required
-													/>
-													<div class="invalid-feedback">
-														A két jelszó nem egyezik!
-													</div>
+											</div>
+											<div class="mb-3">
+												<label for="confirmPasswordInput" class="form-label"
+													>Jelszó megerősítés</label
+												>
+												<input
+													type="password"
+													class="form-control"
+													id="confirmPasswordInput"
+													required
+												/>
+												<!-- data-v-equal="#passwordInput" -->
+												<div class="invalid-feedback">
+													A két jelszó nem egyezik!
 												</div>
-												<div class="mt-5 mb-2 text-center">
-													<button
-														type="submit"
-														class="btn btn-primary"
-														form="user-password-form"
-													>
-														Regisztrálok
-													</button>
-												</div>
-											</form>
+											</div>
+											<div class="mt-5 mb-2 text-center">
+												<button
+													type="submit"
+													id="submit"
+													class="btn btn-primary"
+												>
+													Regisztrálok
+												</button>
+											</div>
 										</div>
 									</div>
 								</div>
-							</div>
+							</form>
+						</div>
+						<div class="p-5 text-center success" style="display: none;">
+							<h5>Sikeres regisztráció!</h5>
 						</div>
 					</div>
+				</div>
 				<!-- </div> -->
 				<!-- </div> -->
 			</div>
