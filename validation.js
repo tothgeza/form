@@ -49,7 +49,7 @@ export function nameValidation(id) {
 }
 
 export function dateValidation(dateId) {
-    var birthString = $(dateId).val().split(".");
+    var birthString = $(dateId).val().split("-");
     var birthDate = new Date((parseInt(birthString[0]) + 18), parseInt(birthString[1]) - 1, birthString[2])
     var today = new Date();
     return today >= birthDate;

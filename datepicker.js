@@ -43,7 +43,7 @@ $(function () {
         weekStart: 1,
         clear: "Töröl",
         titleFormat: "yyyy. MM",
-        format: "yyyy.mm.dd",
+        format: "yyyy-mm-dd",
     };
     $("#datepicker").datepicker({
         // format: "yyyy-mm-dd",

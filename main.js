@@ -11,6 +11,8 @@ import {
     confirmPasswordValidation
 } from './validation.js';
 
+const baseURL = 'localhost';
+
 $(function () {
     console.log(navigator.userAgent)
 
@@ -35,42 +37,42 @@ $(function () {
     $("form").submit(function (event) {
         if (passwordValidation() && confirmPasswordValidation()) {
             let formData = $(this).serializeArray()
-            console.log(formData);
-            console.log(formData[0].value);
+            // console.log(formData);
+            // console.log(formData[0].value);
             showSpinner();
+            let url = baseURL + '/uaa/user/create-parent';
             fetch('https://fakestoreapi.com/users', {
+            // fetch(url, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(
                     {
-                        email: 'John@gmail.com',
-                        username: 'johnd',
-                        password: 'm38rmF$',
-                        name: {
-                            firstname: 'John',
-                            lastname: 'Doe'
-                        },
-                        address: {
-                            city: 'kilcoole',
-                            street: '7835 new road',
-                            number: 3,
-                            zipcode: '12926-3874',
-                            geolocation: {
-                                lat: '-37.3159',
-                                long: '81.1496'
-                            }
-                        },
-                        phone: '1-570-236-7033'
+                        firstName: formData[1].value,
+                        lastName: formData[0].value,
+                        password: formData[5].value,
+                        username: formData[2].value !== '' ? formData[2].value : undefined,
+                        dateOfBirth: formData[3].value,
+                        phoneNumber: formData[4].value !== '' ? ('+36' + formData[4].value.replace(/[-+()\s]/g, '')) : undefined,
+                        code: sessionStorage.getItem('code')
                     }
                 )
             })
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data);
-                    showSuccess();
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    return Promise.reject(response);
                 })
+                .then(data => {
+                    // console.log(data);
+                    showFinalMessage('Sikeres regisztráció!');
+                })
+                .catch((error) => {
+                    showFinalMessage('Sikertelen regisztráció. Kérjük, próbáld meg később!');
+                })
+            sessionStorage.clear();
             event.preventDefault();
         } else {
             setPasswordValidationMessage()
@@ -128,10 +130,11 @@ $(function () {
         ></span> Küldés...`)
         $('#spinner').css("display", "block");
     }
-    function showSuccess() {
+    function showFinalMessage(message) {
         $('#spinner').css("display", "none");
         $('.card').css("display", "flex");
-        $('.message').children('h5').html("Sikeres regisztráció!");
+        $('.message').children('h5').html(message);
         $('.message').css("display", "block");
     }
+
 })

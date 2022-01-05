@@ -1,16 +1,22 @@
+const baseURL = 'localhost'
+
 $(function() {
+
     const queryString = window.location.search;
     // console.log(queryString);
     const urlParams = new URLSearchParams(queryString);
-    const token = urlParams.get('pass')
+    const token = urlParams.get('code')
     // console.log(token);
-    // const url = 'https://jsonplaceholder.typicode.com/todos/1';
-    const url = 'https://fakestoreapi.com/users/1';
+    sessionStorage.setItem('code', token);
+    const url = baseURL + '/uaa/user/check-invit-code';
     fetch(url, {
-        method: 'GET',
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
+        body: JSON.stringify({
+            code: token
+        })
     } )
     .then(response => {
         if (response.ok) {
@@ -23,12 +29,9 @@ $(function() {
             fillData(data);
             hideSpinner();
             showForm();
-        // let mainScript = document.createElement("script");
-        // mainScript.setAttribute("src", "main.js");
-        // document.body.appendChild(mainScript);
     })
     .catch((error) => {
-        console.log('Something went wrong.', error);
+        // console.log('Something went wrong.', error);
         hideSpinner();
         showForm();
         showErrorMessage();
@@ -37,14 +40,15 @@ $(function() {
 })
 
 function fillData(data){
-    $('#emailInput').val(data.email);
-    $('#familyName').html("Meghívtak a " + data.name.lastname + " családba!");
-    $('#lastNameInput').val(data.name.lastname);
-    $('#firstNameInput').val(data.name.firstname);
+    $('#emailInput').val(data.content.receiverUsername);
+    $('#familyName').html("Meghívtak a " + data.content.familyName + " családba!");
+    $('#lastNameInput').val(data.content.lastName);
+    $('#firstNameInput').val(data.content.firstName);
 }
 
 function hideSpinner() {
     $('#spinner').css("display", "none");
+    $('section').css("display", "block");
 }
 
 function showForm() {
@@ -53,6 +57,6 @@ function showForm() {
 
 function showErrorMessage() {
     $('.accordion').css("display", "none");
-    $('.message').children('h5').html("Lejárt a regisztráció lehetőséged!");
+    $('.message').children('h5').html("Lejárt a meghívó érvényessége! Kérjük, lépj kapcsolatba a feladóval!");
     $('.message').css("display", "block");
 }
