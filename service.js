@@ -64,12 +64,13 @@ export async function fetchSubmit(formData){
         },
         body: JSON.stringify(
             {
-                firstName: formData[1].value,
-                lastName: formData[0].value,
-                password: formData[5].value,
-                username: formData[2].value !== '' ? formData[2].value : undefined,
-                dateOfBirth: formData[3].value,
-                phoneNumber: formData[4].value !== '' ? ('+36' + formData[4].value.replace(/[-+()\s]/g, '')) : undefined,
+                username: formData[0].value,
+                firstName: formData[2].value,
+                lastName: formData[1].value,
+                password: formData[6].value,
+                nickName: formData[3].value !== '' ? formData[2].value : undefined,
+                dateOfBirth: formData[4].value,
+                phoneNumber: formData[5].value !== '' ? ('+36' + formData[4].value.replace(/[-+()\s]/g, '')) : undefined,
                 code: sessionStorage.getItem('code')
             }
         )
