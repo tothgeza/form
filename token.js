@@ -1,8 +1,6 @@
 import { fillData, hideSpinner, showForm, showMessage, fecthInvitation } from "./service.js";
 import { setNameValidationMessage } from "./validation.js";
 
-const baseURL = 'localhost'
-
 $(function() {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
