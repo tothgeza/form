@@ -1,10 +1,10 @@
 const baseURL = 'localhost';
 
 export function fillData(data) {
-    $('#emailInput').val(data.email);
-    $('#familyName').html("meghívott a " + data.name.lastname + " családba!");
-    $('#lastNameInput').val(data.name.lastname);
-    $('#firstNameInput').val(data.name.firstname);
+    $('#emailInput').val(data.content.receiverUsername);
+    $('#familyName').html("Meghívtak a " + data.content.familyName + " családba!");
+    $('#lastNameInput').val(data.content.lastName);
+    $('#firstNameInput').val(data.content.firstName);
 }
 
 export function hideSpinner() {
