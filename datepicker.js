@@ -54,5 +54,6 @@ $(function () {
         toggleActive: true,
         endDate: '-18y'
         // defaultViewDate: { year: 2003, month: 04, day: 25 },
+       
     });
 });

@@ -21,6 +21,7 @@ export function setPhoneValidationMessage() {
         $('#phoneInput').removeClass('is-valid').addClass('is-invalid');
     }
 }
+
 export function setPasswordValidationMessage() {
     if (passwordValidation()) {
         $('#passwordInput').removeClass('is-invalid').addClass('is-valid');
@@ -33,7 +34,6 @@ export function setPasswordValidationMessage() {
         }
         $('#passwordInput').removeClass('is-valid').addClass('is-invalid');
     }
-
 }
 
 export function setConfirmPasswordValidationMessage() {
@@ -84,9 +84,9 @@ passwordInput.blur(function () {
     // $('#message').hide();
 
 })
+
 // When the user starts to type something inside the password field
 passwordInput.keyup(function () {
-
     // Validate lowercase letters
     var lowerCaseLetters = /[a-z]/g;
     if (passwordInput.val().match(lowerCaseLetters)) {
@@ -154,7 +154,6 @@ export function passwordValidation() {
 
 function passwordNotMatchName() {
     let matchArray = [];
-    // console.log("password: " + $('#passwordInput').val());
     let email = $("#emailInput").val();
     let firstName = $('#firstNameInput').val().trim();
     let lastName = $('#lastNameInput').val().trim();
@@ -179,6 +178,5 @@ function passwordNotMatchName() {
     } else {
         matchArray.push(makeSortString(firstName))
     }
-    // console.log(matchArray);
     return !matchArray.some(name => makeSortString(password.toLowerCase()).includes(name.toLowerCase()));
 }

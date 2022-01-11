@@ -11,12 +11,14 @@ import {
     confirmPasswordValidation
 } from './validation.js';
 
-$(function () {
-    console.log(navigator.userAgent)
+import {
+    showSpinner,
+    showFinalMessage,
+    fetchSubmit
+} from './service.js';
 
+$(function () {
     $("#headingTwoButton").on('click', function () {
-        // console.log(dateValidation('#dateInput'));
-        // console.log("telszám: " + $('#phoneInput').val().replace(/[-+()\s]/g, ''))
         setNameValidationMessage('#lastNameInput');
         setNameValidationMessage('#firstNameInput');
         setDateValidationMessage();
@@ -30,47 +32,26 @@ $(function () {
             $('#collapseTwo').collapse();
             $('#headingTwo').remove();
         }
-
     })
+
     $("form").submit(function (event) {
         if (passwordValidation() && confirmPasswordValidation()) {
             let formData = $(this).serializeArray()
-            console.log(formData);
-            console.log(formData[0].value);
             showSpinner();
-            fetch('https://fakestoreapi.com/users', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(
-                    {
-                        email: 'John@gmail.com',
-                        username: 'johnd',
-                        password: 'm38rmF$',
-                        name: {
-                            firstname: 'John',
-                            lastname: 'Doe'
-                        },
-                        address: {
-                            city: 'kilcoole',
-                            street: '7835 new road',
-                            number: 3,
-                            zipcode: '12926-3874',
-                            geolocation: {
-                                lat: '-37.3159',
-                                long: '81.1496'
-                            }
-                        },
-                        phone: '1-570-236-7033'
-                    }
-                )
+            fetchSubmit(formData)
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                }
+                return Promise.reject(response);
             })
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data);
-                    showSuccess();
-                })
+            .then(data => {
+                showFinalMessage("Sikeres regisztráció!");
+            })
+            .catch((error) => {
+                showFinalMessage("Sikertelen regisztráció. Kérjük, próbáld meg később!")
+            })
+            sessionStorage.clear();
             event.preventDefault();
         } else {
             setPasswordValidationMessage()
@@ -115,23 +96,7 @@ $(function () {
     });
 
     $('#confirmPasswordInput').on('blur input', function () {
-        setConfirmPasswordValidationMessage()
+        if (passwordValidation())
+            setConfirmPasswordValidationMessage()
     })
-
-    function showSpinner() {
-        $('.card').css("display", "none");
-        $('.accordion').css("display", "none");
-        $('#spinner').html(`<span
-            class="spinner-border spinner-border-sm"
-            role="status"
-            aria-hidden="true"
-        ></span> Küldés...`)
-        $('#spinner').css("display", "block");
-    }
-    function showSuccess() {
-        $('#spinner').css("display", "none");
-        $('.card').css("display", "flex");
-        $('.message').children('h5').html("Sikeres regisztráció!");
-        $('.message').css("display", "block");
-    }
 })

@@ -9,10 +9,6 @@ body {
 }
 /* The message box is shown when the user clicks on the password field */
 #messageInside {
-	/* display: none; */
-	/* background: #f1f1f1; */
-	/* color: #000; */
-	/* position: relative; */
 	font-size: 12px;
 	padding: 20px;
 	margin-top: 10px;
@@ -38,19 +34,153 @@ body {
 .invalid::before {
 	position: relative;
 	left: -10px;
-	/* font-size: 10px; */
-	content: "\2716";
+	content: "\274c";
+}
+.input-group-append, #phoneInput{
+	border-top-right-radius: 3.5px !important;
+	border-bottom-right-radius: 3.5px !important;
+}
+/*Bootstrap Calendar*/
+.datepicker {
+    padding: 0 !important;
+	width: 241.4px;
+	margin-left: -1px !important;
+  /* z-index: 1000 !important; */
 }
 
-/* @media screen and (max-width: 640px) {
-  .container-sm {
-    background-color: green;
-  }
-} */
+.table-condensed{
+	width: 240px;
+}
 
-/* @media screen and (orientation: portrait) {
-  section {
-    height: 100vh;
-	width: 100vw;
-  }
-} */
+.table-condensed > tfoot > tr > td,
+.table-condensed > tfoot > tr > th{
+	padding: 11px !important;
+}
+
+.table-condensed > tbody > tr > td {
+    padding: 6px 9px !important;
+}
+
+.table-condensed > thead > tr > th{
+	padding: 11px 18px !important;
+}
+
+.datepicker-centuries table thead,
+.datepicker-decades table thead,
+.datepicker-years table thead,
+.datepicker-months table thead, 
+.datepicker-days table thead, .datepicker-days table tbody {
+   padding: 10px;
+   display: list-item;
+}
+
+.datepicker-days table tbody td {
+  border: 1px solid #ededed !important;
+  border-collapse: collapse !important;
+}
+
+.datepicker-days table thead th {
+	width: 34.2px !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	border-radius: 0 !important;
+	
+}
+
+.datepicker-days table thead tr:last-child {
+	background-color: #0257d5 !important;
+}
+
+.datepicker-days table tbody,
+.datepicker-mopnths table tbody,
+.datepicker-years table tbody,
+.datepicker-decades table tbody, .datepicker-centuries table tbody
+ {
+	padding: 0;
+}
+
+.datepicker-days table thead, .datepicker-months table thead,
+.datepicker-years table thead, .datepicker-decades table thead, .datepicker-centuries table thead {
+    background: #0d6efd;
+    color: #ffffff;
+    border-radius: 0;
+	padding: 0;
+}
+
+.datepicker-months table thead td, .datepicker-months table thead th, .datepicker-years table thead td, .datepicker-years table thead th, .datepicker-decades table thead td, .datepicker-decades table thead th, .datepicker-centuries table thead td, .datepicker-centuries table thead th {
+	border-radius: 0;
+}
+
+.datepicker-days table thead, .datepicker-months table thead, .datepicker-years table thead, .datepicker-decades table thead, .datepicker-centuries table thead {
+	background: #0d6efd;
+	color: #ffffff;
+	/* border-radius: 3px !important; */
+	border-top-left-radius: 3px !important;
+	border-top-right-radius: 3px !important;
+}
+
+.datepicker tbody td, .datepicker tbody th {
+	border-radius: 0 !important;
+	padding: 0 12px !important;
+}
+
+.datepicker .prev, .datepicker .next {
+	color: rgba(255, 255, 255, 0.5);
+	transition: 0.3s;
+	font-size: 18px;
+	height: 37px;
+	
+}
+
+.datepicker .datepicker-switch {
+	font-size: 18px !important;
+	font-weight: 500;
+	transition: 0.3s;
+}
+
+.datepicker table tr td span {
+    margin: 3% !important;
+    width: 19% !important;
+	line-height: 54px !important;
+	height: 54px !important;
+}
+
+.datepicker .datepicker-switch:hover {
+    color: rgba(255, 255, 255, 0.7);
+    background: transparent !important;
+}
+
+.datepicker .prev:hover, .datepicker .next:hover {
+    background: transparent !important;
+    color: rgba(255, 255, 255, 0.99);
+}
+
+.datepicker table tr td.active, .datepicker table tr td.active:hover, .datepicker table tr td.active.disabled, .datepicker table tr td.active.disabled:hover {
+	background-color: #0d6efd !important;
+	background-image: none !important;
+}
+
+.datepicker table tr td span.active, .datepicker table tr td span.active:hover, .datepicker table tr td span.active.disabled, .datepicker table tr td span.active.disabled:hover {
+  	background-color: #0d6efd !important;
+  	background-image: none !important;
+}
+
+.dropdown-menu {
+    border: 1px solid rgba(0,0,0,.1) !important;
+    box-shadow: 0 6px 12px rgba(0,0,0,.175) !important;
+}
+
+.datepicker-dropdown.datepicker-orient-top:before {
+    border-top: 7px solid rgba(0,0,0,.1) !important;
+}
+
+.datepicker-days table thead tr:nth-child(2n+0) td, .datepicker-days table thead tr:nth-child(2n+0) th {
+	border-radius: 3px !important;
+}
+
+.datepicker-days table thead tr:nth-child(3n+0) {
+	text-transform: uppercase !important;
+	font-weight: 300 !important;
+	font-size: 10px;
+	color: rgba(255, 255, 255, 0.7);
+}
