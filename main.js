@@ -35,6 +35,7 @@ $(function () {
     })
 
     $("form").submit(function (event) {
+        event.preventDefault();
         if (passwordValidation() && confirmPasswordValidation()) {
             let formData = $(this).serializeArray()
             showSpinner();
@@ -52,10 +53,11 @@ $(function () {
                 showFinalMessage("Sikertelen regisztráció. Kérjük, próbáld meg később!")
             })
             sessionStorage.clear();
-            event.preventDefault();
         } else {
             setPasswordValidationMessage()
-            setConfirmPasswordValidationMessage()
+            if(passwordValidation()){
+                setConfirmPasswordValidationMessage()
+            }
         }
     });
 
