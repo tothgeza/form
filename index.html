@@ -112,6 +112,35 @@
 													readonly
 													/>
 											</div>
+											<div class="mb-2">
+												<label for="relationTypeInput" class="form-label"
+													>Kapcsolat</label
+												>
+												<select
+													class="form-select"
+													id="relationTypeInput"
+													name="relationTypeInput"
+													>
+													<option value="choose">Kérjük, válassz!</option>
+													<option value="Szülő">Szülő</option>
+													<option value="Nagyszülő">Nagyszülő</option>
+													<option value="other">Más lehetőség:</option>
+												</select>
+												<div class="invalid-feedback">
+													Kérjük, válassz!
+												</div>
+											</div>
+											<div class="mb-3">
+												<input
+													type="text"
+													class="form-control"
+													id="otherRelationInput"
+													name="otherRelationInput"
+													/>
+												<div class="invalid-feedback">
+													Kérjük, töltsd ki ezt a mezőt!
+												</div>
+											</div>
 											<div class="mb-3">
 												<label for="lastNameInput" class="form-label"
 													>Vezetéknév</label

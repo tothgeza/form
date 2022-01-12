@@ -43,9 +43,39 @@ export function setConfirmPasswordValidationMessage() {
         $('#confirmPasswordInput').removeClass('is-valid').addClass('is-invalid');
     }
 }
+export function setFamilyRelationValidationMessage() {
+    if (familyRelationValidation()) {
+        $('#relationTypeInput').removeClass('is-invalid').addClass('is-valid');
+    } else {
+        $('#relationTypeInput').removeClass('is-valid').addClass('is-invalid');
+    }
+}
+export function removeFamilyRelationValidationMessage() {
+    $('#relationTypeInput').removeClass('is-invalid').removeClass('is-valid');
+}
+
+export function setFamilyRelationOtherValidationMessage() {
+    if (familyRelationOtherValidation()) {
+        $('#otherRelationInput').removeClass('is-invalid').addClass('is-valid');
+    } else {
+        $('#otherRelationInput').removeClass('is-valid').addClass('is-invalid');
+    }
+}
+export function removeFamilyRelationOtherValidationMessage() {
+    $('#otherRelationInput').removeClass('is-invalid').removeClass('is-valid');
+}
+
 
 export function nameValidation(id) {
     return $(id).val().trim() !== ''
+}
+
+export function familyRelationValidation(){
+    return ($('#relationTypeInput').val() !== "choose");
+}
+
+export function familyRelationOtherValidation(){
+    return ($('#relationTypeInput').val() === "other" && $('#otherRelationInput').val() !== '')
 }
 
 export function dateValidation(dateId) {

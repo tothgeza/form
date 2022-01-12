@@ -65,12 +65,13 @@ export async function fetchSubmit(formData){
         body: JSON.stringify(
             {
                 username: formData[0].value,
-                firstName: formData[2].value,
-                lastName: formData[1].value,
-                password: formData[6].value,
-                nickName: formData[3].value !== '' ? formData[2].value : undefined,
-                dateOfBirth: formData[4].value,
-                phoneNumber: formData[5].value !== '' ? ('+36' + formData[5].value.replace(/[-+()\s]/g, '')) : undefined,
+                familyRelationType: formData[1].value === 'other' ? formData[2].value : formData[1].value,
+                firstName: formData[4].value,
+                lastName: formData[3].value,
+                password: formData[8].value,
+                nickName: formData[5].value !== '' ? formData[5].value : undefined,
+                dateOfBirth: formData[6].value,
+                phoneNumber: formData[7].value !== '' ? ('+36' + formData[7].value.replace(/[-+()\s]/g, '')) : undefined,
                 code: sessionStorage.getItem('code')
             }
         )

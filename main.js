@@ -4,6 +4,12 @@ import {
     setPhoneValidationMessage,
     setPasswordValidationMessage,
     setConfirmPasswordValidationMessage,
+    familyRelationValidation,
+    familyRelationOtherValidation,
+    setFamilyRelationValidationMessage,
+    removeFamilyRelationValidationMessage,
+    setFamilyRelationOtherValidationMessage,
+    removeFamilyRelationOtherValidationMessage,
     nameValidation,
     dateValidation,
     phoneValidation,
@@ -22,12 +28,18 @@ $(function () {
         setNameValidationMessage('#lastNameInput');
         setNameValidationMessage('#firstNameInput');
         setDateValidationMessage();
-        if ($('#phoneInput').val() != '') {
+        if ($('#relationTypeInput').val() === "other") {
+            setFamilyRelationOtherValidationMessage()
+        }else {
+            setFamilyRelationValidationMessage()
+        }
+        if ($('#phoneInput').val() !== '') {
             setPhoneValidationMessage()
         } else {
             $('#phoneInput').removeClass('is-invalid').removeClass('is-valid');
         }
-        if (nameValidation('#firstNameInput') && nameValidation('#lastNameInput') && dateValidation('#dateInput') && (phoneValidation() || $('#phoneInput').val() === '')) {
+        if (nameValidation('#firstNameInput') && nameValidation('#lastNameInput') && dateValidation('#dateInput') && (phoneValidation() || $('#phoneInput').val() === '')
+            && familyRelationValidation() && ($('#relationTypeInput').val() !== "other" || familyRelationOtherValidation())) {
             $('#collapseOne').collapse();
             $('#collapseTwo').collapse();
             $('#headingTwo').remove();
@@ -60,6 +72,22 @@ $(function () {
             }
         }
     });
+
+    $('#relationTypeInput').change(function() {
+        if ($('#relationTypeInput').val() === "other") {
+            $('#otherRelationInput').show()
+            $('#otherRelationInput').focus()
+            removeFamilyRelationValidationMessage()
+        } else {
+            $('#otherRelationInput').hide()
+            setFamilyRelationValidationMessage()
+            removeFamilyRelationOtherValidationMessage()
+        }
+    })
+
+    $('#otherRelationInput').on('blur input', function() {
+        setFamilyRelationOtherValidationMessage()
+    })
 
     var phoneMask = IMask(
         document.getElementById('phoneInput'), {
