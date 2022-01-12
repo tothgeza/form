@@ -70,7 +70,7 @@ export async function fetchSubmit(formData){
                 password: formData[6].value,
                 nickName: formData[3].value !== '' ? formData[2].value : undefined,
                 dateOfBirth: formData[4].value,
-                phoneNumber: formData[5].value !== '' ? ('+36' + formData[4].value.replace(/[-+()\s]/g, '')) : undefined,
+                phoneNumber: formData[5].value !== '' ? ('+36' + formData[5].value.replace(/[-+()\s]/g, '')) : undefined,
                 code: sessionStorage.getItem('code')
             }
         )
