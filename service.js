@@ -2,7 +2,14 @@ const baseURL = 'localhost';
 
 export function fillData(data) {
     $('#emailInput').val(data.content.receiverUsername);
-    $('#familyName').html("Meghívtak a " + data.content.familyName + " családba!");
+    if(data.content.familyInvitation){
+        $('#familyName').html("Meghívtak a " + data.content.familyName + " családba!");
+    } else {
+        $('#familyName').html("Meghívtak a diákszéf alkalmazásba!");
+        $('#relationTypeInput').val('other');
+        $('#relationTypeInput').hide();
+        $('#otherRelationInput').show();
+    }
     $('#lastNameInput').val(data.content.lastName);
     $('#firstNameInput').val(data.content.firstName);
 }
@@ -69,7 +76,7 @@ export async function fetchSubmit(formData){
                 firstName: formData[4].value,
                 lastName: formData[3].value,
                 password: formData[8].value,
-                nickName: formData[5].value !== '' ? formData[5].value : undefined,
+                nickName: formData[5].value !== '' ? formData[5].value : formData[4].value,
                 dateOfBirth: formData[6].value,
                 phoneNumber: formData[7].value !== '' ? ('+36' + formData[7].value.replace(/[-+()\s]/g, '')) : undefined,
                 code: sessionStorage.getItem('code')
